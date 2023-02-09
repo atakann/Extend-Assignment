@@ -29,3 +29,36 @@ Tech stack will include the following,
  * **Flask** as Python web-framework
  * **PostgreSQL** as Database
  * **SQLAlchemy ORM** as ORM
+
+
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    publication_date DATE
+);
+
+CREATE TABLE genres (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE book_genres (
+    book_id INTEGER,
+    genre_id INTEGER,
+    PRIMARY KEY (book_id, genre_id),
+    FOREIGN KEY (book_id) REFERENCES books(id),
+    FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
+
+INSERT INTO genres (name) VALUES
+           ('Fantasy'),
+           ('Science Fiction'),
+           ('Mystery'),
+           ('Romance');
+
+INSERT INTO books (name, author, publication_date) VALUES
+           ('The Lord of the Rings', 'J.R.R. Tolkien', '1954-07-29'),
+           ('Dune', 'Frank Herbert', '1965-06-01'),
+           ('Murder on the Orient Express', 'Agatha Christie', '1934-01-01'),
+           ('Pride and Prejudice', 'Jane Austen', '1813-01-28');

@@ -1,20 +1,22 @@
-from app import app
 from flask_sqlalchemy import SQLAlchemy
 
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 """
 Models
 """
 
 
 class Book(db.Model):
+    """
+    A model representing a Book in the Library
+    """
     __tablename__ = "books"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
     author = db.Column(db.String(120), nullable=False)
-    publication = db.Column(db.Date, nullable=False)
+    publication_date = db.Column(db.Date, nullable=False)
     # many-to-many relationship between books and genres
     # secondary specifies the join table
     genres = db.relationship(
@@ -26,6 +28,9 @@ class Book(db.Model):
 
 
 class Genre(db.Model):
+    """
+    A model representing a Genre in the Library
+    """
     __tablename__ = "genres"
 
     id = db.Column(db.Integer, primary_key=True)
