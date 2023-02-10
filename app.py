@@ -43,6 +43,10 @@ def get_books(
     Returns:
         dict: a dictionary containing status code and book data
     """
+    data = request.get_json()
+    author = data.get("author")
+    genres = data.get("genres")
+    sort = data.get("sort")
     books = Book.query
 
     if author:
