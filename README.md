@@ -37,3 +37,21 @@ Tech stack will include the following,
  * **Docker** and **Docker Compose** for containerization and deployment
  
  The application uses Flask to handle HTTP requests and responses, SQLAlchemy ORM to communicate with PostgreSQL database. Docker and Docker Compose are used to containerize the application and its dependencies, making it easy to run and deploy the application.
+
+
+## API Endpoints
+The Library App has the following API endpoints:
+
+### GET /books
+This endpoint returns a list of books filtered by author and genre, and can be sorted by publication date. It accepts the following query parameters:
+* `author`: the author name to filter the books.
+* `genres`: a list of genre names to filter the books. Multiple genres can be provided by separating them with commas.
+* `sort`: the sort order for the books by publication date. Can be either `asc`or `desc`
+
+The response of this endpoint is a JSON object containing a list of books, where each book has the following fields:
+* `title`: title of the book
+* `author`: author of the book
+* `genres`: a list of genres of the book
+
+
+
