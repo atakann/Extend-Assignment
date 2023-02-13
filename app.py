@@ -117,19 +117,17 @@ def get_genres() -> dict:
 
     Returns:
         list: a dictionary with:
-            - status_code : HTTP status code
             - message: a list of dictionaries with genre:
                 - id: integer, the id of the genre
                 - name: string, the name of the genre
     """
 
     genres = Genre.query.all()
-    return jsonify(
+    return (jsonify(
         {
-            "status_code": 200,
             "message": [{"id": genre.id, "name": genre.name} for genre in genres],
         }
-    )
+    ), 200)
 
 
 @app.route("/genres", methods=["PUT"])
@@ -139,7 +137,6 @@ def update_genre() -> dict:
 
     Returns:
         A JSON object with keys:
-            - status_code: HTTP Status Code
             - message: error message or result dictionary
                 - id: integer, the id of the genre
                 - name: string, the name of the genre
@@ -152,7 +149,6 @@ def update_genre() -> dict:
         return (
             jsonify(
                 {
-                    "status_code": 404,
                     "message": f"Genre with name '{genre_name}' not found.",
                 }
             ),
@@ -163,7 +159,7 @@ def update_genre() -> dict:
     db.session.commit()
 
     return (
-        jsonify({"status_code": 200, "message": {"id": genre.id, "name": genre.name}}),
+        jsonify({"message": {"id": genre.id, "name": genre.name}}),
         200,
     )
 
