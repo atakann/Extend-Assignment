@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_migrate import Migrate
-from typing import List, Optional, Dict, Union
+from typing import List, Optional
 
 
 """
@@ -41,12 +41,13 @@ def get_books(
         sort (str, optional): arg to indicate sort order ('asc' or 'desc')
 
     Returns:
-        dict: a dictionary containing status code and book data
+        dict: a dictionary containing book data
     """
-    data = request.get_json()
-    author = data.get("author")
-    genres = data.get("genres")
-    sort = data.get("sort")
+    author = request.args.get("author")
+    genres = request.args.get("genres")
+    if genres:
+        genres = genres.split(",")
+    sort = request.args.get("sort")
     books = Book.query
 
     if author:
@@ -59,8 +60,8 @@ def get_books(
         books = books.order_by(Book.publication_date.desc())
 
     books = books.all()
-
     result = []
+    # result = [{"title": book.title, "author": book.author, "genres":[genre.name for genre in book.genres]} for book in books]
     for book in books:
         result.append(
             {
@@ -70,7 +71,7 @@ def get_books(
             }
         )
 
-    return result
+    return jsonify(result)
 
 
 @app.route("/books", methods=["POST"])
@@ -172,45 +173,4 @@ Launch, debug mode, port config
 """
 
 if __name__ == "__main__":
-    # with app.app_context():
-    #     db.create_all()
-
-    #     # Add some genres to the database
-    #     fiction = Genre(name="Fiction")
-    #     non_fiction = Genre(name="Non-Fiction")
-    #     mystery = Genre(name="Mystery")
-
-    #     db.session.add(fiction)
-    #     db.session.add(non_fiction)
-    #     db.session.add(mystery)
-
-    #     # Add some books to the database
-    #     book1 = Book(
-    #         title="The Great Gatsby",
-    #         author="F. Scott Fitzgerald",
-    #         publication_date="1925-04-10",
-    #     )
-    #     book2 = Book(
-    #         title="To Kill a Mockingbird",
-    #         author="Harper Lee",
-    #         publication_date="1960-07-11",
-    #     )
-    #     book3 = Book(
-    #         title="Pride and Prejudice",
-    #         author="Jane Austen",
-    #         publication_date="1813-01-28",
-    #     )
-
-    #     db.session.add(book1)
-    #     db.session.add(book2)
-    #     db.session.add(book3)
-
-    #     # Associate the books with their respective genres
-    #     book1.genres.append(fiction)
-    #     book2.genres.append(fiction)
-    #     book2.genres.append(mystery)
-    #     book3.genres.append(fiction)
-
-    #     db.session.commit()
-
-    app.run()
+    app.run(debug=True)

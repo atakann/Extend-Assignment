@@ -53,5 +53,19 @@ The response of this endpoint is a JSON object containing a list of books, where
 * `author`: author of the book
 * `genres`: a list of genres of the book
 
-
-
+Example request:
+```
+GET /books?author=Jane%20Austen&genres=Fiction&sort=asc
+```
+ Example response:
+ ```
+ [
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genres": [
+            "Fiction"
+        ]
+    }
+]
+```
