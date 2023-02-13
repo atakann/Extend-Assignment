@@ -42,7 +42,7 @@ Tech stack will include the following,
 ## API Endpoints
 The Library App has the following API endpoints:
 
-### GET /books
+### GET /books
 This endpoint returns a list of books filtered by author and genre, and can be sorted by publication date. It accepts the following query parameters:
 * `author`: the author name to filter the books.
 * `genres`: a list of genre names to filter the books. Multiple genres can be provided by separating them with commas.
