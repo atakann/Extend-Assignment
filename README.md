@@ -38,7 +38,10 @@ Tech stack will include the following,
 
 The application uses Flask to handle HTTP requests and responses, SQLAlchemy ORM to communicate with PostgreSQL database. Docker and Docker Compose are used to containerize the application and its dependencies, making it easy to run and deploy the application.
 
+## Notes
 
+* **Formatting**:
+    * black is used to format the code
 
 ## API Endpoints
 

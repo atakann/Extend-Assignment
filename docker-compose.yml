@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      -db
+    environment:
+      - FLASK_APP: app.py
+      - FLASK_ENV: development
+      - SQLALCHEMY_DATABASE_URI: postgres://postgres@db/library
+    command: >
+      sh -c "flask db updgrade && python seeds.py && flask run --host:0.0.0.0"
+
+  db:
+    image: postgres:latest
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER: postgres
+      - POSTGRES_DB: library
+    ports:
+      - "5432:5432"
+    
