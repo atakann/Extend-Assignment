@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from flask_migrate import Migrate
 from typing import List, Optional
@@ -8,13 +9,12 @@ App Config
 """
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres@localhost:5432/library"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 from models import db, Book, Genre
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
 
 """
 Controllers

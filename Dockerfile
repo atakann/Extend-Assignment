@@ -12,5 +12,8 @@ RUN pip install -r requirements.txt
 # Copy app code into container
 COPY . .
 
+# Expose port
+EXPOSE 5000
+
 # Start app
-CMD ["python", "app.py"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
