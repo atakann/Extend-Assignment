@@ -42,6 +42,36 @@ The application uses Flask to handle HTTP requests and responses, SQLAlchemy ORM
 
 * **Formatting**:
     * black is used to format the code
+* **Database**:
+    * seeds.py script populates the database after it is created with some examples
+* **Testing**:
+    * I have used Postman to test the API endpoints, which gives example responses back from example requests.
+
+
+## How to Use
+To run the Library App, you'll need Docker and Docker Compose installed on your computer.
+
+### Clone the Repository
+First, clone the repository to your local machine:
+```
+git clone https://github.com/atakann/Extend-Assignment.git
+```
+
+### Build the Docker Image & Start the Application
+Navigate to the project directory and build the Docker image:
+
+```
+docker-compose build
+```
+
+Start the application using the following command:
+
+```
+docker-compose up
+```
+
+You can now test the API endpoints using a tool like Postman. Some examples are given in the **API Endpoints** section below.
+
 
 ## API Endpoints
 
