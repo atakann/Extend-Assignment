@@ -23,7 +23,7 @@ class Book(db.Model):
     genres = db.relationship("Genre", secondary="book_genres", backref="books", lazy=True)
 
     def __repr__(self) -> str:
-        return f"<Book {self.title} by {self.author}>"
+        return f"<Book {self.id}: {self.title} by {self.author}>"
 
 
 class Genre(db.Model):
@@ -37,7 +37,7 @@ class Genre(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
 
     def __repr__(self) -> str:
-        return f"<Genre {self.name}>"
+        return f"<Genre {self.id}: {self.name}>"
 
 
 # Join table for many-to-many relationship. Single book can belong to one or more
