@@ -65,6 +65,7 @@ def get_books(
     for book in books:
         result.append(
             {
+                "id": book.id,
                 "title": book.title,
                 "author": book.author,
                 "genres": [genre.name for genre in book.genres],
@@ -104,7 +105,7 @@ def create_book() -> dict:
     db.session.commit()
 
     return (
-        jsonify({"message": "Book successfully created", "Book Title": book.title}),
+        jsonify({"message": "Book successfully created","Book ID": book.id, "Book Title": book.title}),
         201,
     )
 
